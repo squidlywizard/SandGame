@@ -1,5 +1,8 @@
+package Sand;
 import java.awt.*;
 import java.util.*;
+//import Sand.SandDisplay;
+
 
 public class SandLab
 {
@@ -7,6 +10,7 @@ public class SandLab
   //add constants for particle types here
   public static final int EMPTY = 0;
   public static final int METAL = 1;
+  public static final int SAND = 2;
   
   //do not add any more fields below
   private int[][] grid;
@@ -23,13 +27,14 @@ public class SandLab
     String[] names;
     // Change this value to add more buttons
     //Step 4,6
-    names = new String[2];
+    names = new String[3];
     // Each value needs a name for the button
     names[EMPTY] = "Empty";
     names[METAL] = "Metal";
+    names[SAND]= "sand";
     
     //1. Add code to initialize the data member grid with same dimensions
-    grid = new int[numRows][numCols];
+    this.grid = new int[numRows][numCols];
     
     display = new SandDisplay("Falling Sand", numRows, numCols, names);
   }
@@ -38,13 +43,32 @@ public class SandLab
   private void locationClicked(int row, int col, int tool)
   {
     //2. Assign the values associated with the parameters to the grid
-   
+   grid[row][col] = tool;
   }
 
   //copies each element of grid into the display
   public void updateDisplay()
   {
       //Step 3
+	  for(int I = 0; I<grid[0].length;I++)
+	  {
+		  for(int O = 0; O<grid.length; O++)
+	  {
+		 if(grid[I][O] == 0)
+		 {
+			 display.setColor(I, O, Color.BLACK);
+		 }
+		 else if(grid[I][O] == 1)
+		 {
+			 display.setColor(I, O, Color.GRAY);
+		 }
+		 else
+		 {
+			 display.setColor(I, O, Color.ORANGE);
+		 }
+	  }
+		  
+	  }
    //Hint - use a nested for loop
     
   }
@@ -56,7 +80,8 @@ public class SandLab
   {
     //Remember, you need to access both row and column to specify a spot in the array
     //The scalar refers to how big the value could be
-    //int someRandom = (int) (Math.random() * scalar)
+    int someRandomRow = (int) (Math.random() * grid[0].length);
+    int someRandomCol = (int) (Math.random() * grid.length);
     //remember that you need to watch for the edges of the array
     
     
