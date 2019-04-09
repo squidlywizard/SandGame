@@ -82,6 +82,14 @@ public class SandLab
     //The scalar refers to how big the value could be
     int someRandomRow = (int) (Math.random() * grid[0].length);
     int someRandomCol = (int) (Math.random() * grid.length);
+    if(grid[someRandomRow][someRandomCol]== 2 && grid[someRandomRow][someRandomCol+1]==0)
+    {
+    	
+    	grid[someRandomRow][someRandomCol] = 0;
+    	grid[someRandomRow][someRandomCol +1]=2;
+    	
+    	
+    }
     //remember that you need to watch for the edges of the array
     
     
