@@ -11,6 +11,7 @@ public class SandLab
   public static final int EMPTY = 0;
   public static final int METAL = 1;
   public static final int SAND = 2;
+  public static final int WATER = 3;
   
   //do not add any more fields below
   private int[][] grid;
@@ -27,11 +28,12 @@ public class SandLab
     String[] names;
     // Change this value to add more buttons
     //Step 4,6
-    names = new String[3];
+    names = new String[4];
     // Each value needs a name for the button
     names[EMPTY] = "Empty";
     names[METAL] = "Metal";
     names[SAND]= "sand";
+    names[WATER]= "water";
     
     //1. Add code to initialize the data member grid with same dimensions
     this.grid = new int[numRows][numCols];
@@ -62,9 +64,13 @@ public class SandLab
 		 {
 			 display.setColor(I, O, Color.GRAY);
 		 }
-		 else
+		 else if(grid[I][O] == 2)
 		 {
 			 display.setColor(I, O, Color.ORANGE);
+		 }
+		 else
+		 {
+			 display.setColor(I, O, Color.BLUE);
 		 }
 	  }
 		  
@@ -81,22 +87,51 @@ public class SandLab
     //Remember, you need to access both row and column to specify a spot in the array
     //The scalar refers to how big the value could be
     int someRandomRow = (int) (Math.random() * grid[0].length) ;
-    if(!(someRandomRow == 0))
-    {
-    	someRandomRow--;
-    }
+    //int waterRandomRow = (int) (Math.random() *grid[0].length);
+    
+//    if(someRandomRow > 18)
+//    {
+//    	someRandomRow--;
+//    }
     int someRandomCol = (int) (Math.random() * grid.length);
-   // if(!(someRandomCol == 0))
-    //{
-    //	someRandomCol;
-   // }
-    if(grid[someRandomRow][someRandomCol]== 2 && grid[someRandomRow + 1][someRandomCol] == 0)
+    int waterDirection = (int) (Math.random() * 2);
+    if(someRandomCol == 19 && waterDirection== 1)
+    {waterDirection--;
+    	
+    }
+    if(someRandomCol == 0 && waterDirection == 0)
+    {
+    	waterDirection++;
+    }
+    
+    if(!(someRandomRow == 19) && grid[someRandomRow][someRandomCol]== 2 && grid[someRandomRow + 1][someRandomCol] == 0 )
     {
     	
     	grid[someRandomRow][someRandomCol] = 0;
     	grid[someRandomRow + 1][someRandomCol]=2;
     	
     	
+    }
+    if(!(someRandomRow == 19) &&grid[someRandomRow][someRandomCol]== 3 && grid[someRandomRow + 1][someRandomCol] == 0  )
+    {
+    	
+    	grid[someRandomRow][someRandomCol] = 0;
+    	grid[someRandomRow + 1][someRandomCol]=3;
+    	
+    	
+    }
+    
+    else if(grid[someRandomRow][someRandomCol]==3 && waterDirection == 0 && grid[someRandomRow][someRandomCol -1]== 0)
+    {
+   	
+    	grid[someRandomRow][someRandomCol] = 0;
+    	grid[someRandomRow][someRandomCol -1] =3;
+    }
+    else if(grid[someRandomRow][someRandomCol]==3 && waterDirection == 1 && grid[someRandomRow][someRandomCol +1]== 0 )
+    {
+   	
+    	grid[someRandomRow][someRandomCol] = 0;
+    	grid[someRandomRow][someRandomCol +1] =3;
     }
     //remember that you need to watch for the edges of the array
     
