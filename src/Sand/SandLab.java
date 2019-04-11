@@ -80,13 +80,21 @@ public class SandLab
   {
     //Remember, you need to access both row and column to specify a spot in the array
     //The scalar refers to how big the value could be
-    int someRandomRow = (int) (Math.random() * grid[0].length);
+    int someRandomRow = (int) (Math.random() * grid[0].length) ;
+    if(!(someRandomRow == 0))
+    {
+    	someRandomRow--;
+    }
     int someRandomCol = (int) (Math.random() * grid.length);
-    if(grid[someRandomRow][someRandomCol]== 2 && grid[someRandomRow][someRandomCol+1]==0)
+   // if(!(someRandomCol == 0))
+    //{
+    //	someRandomCol;
+   // }
+    if(grid[someRandomRow][someRandomCol]== 2 && grid[someRandomRow + 1][someRandomCol] == 0)
     {
     	
     	grid[someRandomRow][someRandomCol] = 0;
-    	grid[someRandomRow][someRandomCol +1]=2;
+    	grid[someRandomRow + 1][someRandomCol]=2;
     	
     	
     }
